@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "319665837173",
+    "project_id": "kadinasiddetehayir-4a034",
+    "storage_bucket": "kadinasiddetehayir-4a034.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:319665837173:android:296ff5dd636d956f62543c",
+        "android_client_info": {
+          "package_name": "com.example.kadina_siddete_hayir"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "319665837173-j6vfq6b97e0g2s6m68kd1j2r1jqdq3kl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC258h9zA2WB3dFgH2fbaYOEq9NULJPNug"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "319665837173-j6vfq6b97e0g2s6m68kd1j2r1jqdq3kl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
