@@ -17,7 +17,6 @@ class MyApp extends StatefulWidget {
   }
   class _MyAppState extends State<MyApp> {
     String mesaj = "Kadına Şiddete Hayır";
-
     @override
     Widget build(BuildContext context) {
       return Scaffold(

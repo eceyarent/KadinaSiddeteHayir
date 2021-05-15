@@ -1,6 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kadina_siddete_hayir/screens/information_detail_screen.dart';
 import 'package:kadina_siddete_hayir/service/informationsService.dart';
+
+
 
 class InformationScreen extends StatefulWidget{
   @override
@@ -28,7 +31,7 @@ class InformationScreenState extends State {
 
   Widget buildBody() {
     return StreamBuilder(
-      stream: _informationService.getInformations(),
+      stream: _informationService.getInformations("textDetail"),
       builder: (context, snapshot){
         return !snapshot.hasData
             ? CircularProgressIndicator()
@@ -40,7 +43,7 @@ class InformationScreenState extends State {
             return Padding(
               padding: const EdgeInsets.all(8.0),
             child: InkWell(
-            onTap: () =>(context),
+            onTap: () {goToInformationDetailScreen(mypost);},
                 child: Container(
                   decoration: BoxDecoration(
                       color: Colors.white,
@@ -65,4 +68,10 @@ class InformationScreenState extends State {
       },
     );
   }
+
+  void goToInformationDetailScreen(DocumentSnapshot mypost) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) => InformationDetailScreen(mypost)));
+  }
+
+
 }

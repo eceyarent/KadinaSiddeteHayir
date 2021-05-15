@@ -19,7 +19,7 @@ class informationsService {
 
   //veri gösterme fonksiyonu
 
-  Stream<QuerySnapshot> getInformations() {
+  Stream<QuerySnapshot> getInformations(String text) {
     var ref = _firestore.collection("information").snapshots();
 
     return ref;

@@ -1,17 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:kadina_siddete_hayir/models/informations.dart';
 import 'package:kadina_siddete_hayir/service/informationDetailService.dart';
 import 'package:kadina_siddete_hayir/service/informationsService.dart';
 
 class InformationDetailScreen extends StatefulWidget{
+  DocumentSnapshot informations;
+  InformationDetailScreen(this.informations);
   @override
   State<StatefulWidget> createState() {
-    return InformationDetailScreenState();
+    return InformationDetailScreenState(informations);
 
   }
 
 }
 class InformationDetailScreenState extends State {
+  DocumentSnapshot informations;
+  InformationDetailScreenState(this.informations);
   informationDetailService _informationDetailService = informationDetailService();
 
 
@@ -22,7 +27,7 @@ class InformationDetailScreenState extends State {
         backgroundColor: Colors.deepPurple,
         title: Text("Önemli Bilgiler"),
       ),
-      body: buildBody(),
+      body: buildBody2(),
 
     );
   }
@@ -56,6 +61,17 @@ class InformationDetailScreenState extends State {
           },
         );
       },
+    );
+  }
+
+  buildBody2() {
+    final inform = Informations.fromSnapshot(informations);
+    return ListView(
+      children: [
+        ListTile(
+          title: Text(inform.textDetail),
+        )
+      ],
     );
   }
 }

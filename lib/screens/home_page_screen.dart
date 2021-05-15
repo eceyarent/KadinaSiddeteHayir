@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:kadina_siddete_hayir/screens/account_screen.dart';
 import 'package:kadina_siddete_hayir/screens/information_screen.dart';
 import 'package:kadina_siddete_hayir/screens/relatives_list_screen.dart';
+import 'package:kadina_siddete_hayir/screens/video_screen.dart';
 
 class HomePageScreen extends StatefulWidget{
   @override
@@ -164,14 +165,15 @@ class HomePageScreenState extends State {
                     ),
                     Column(
                       children: [
-                        Text("Savunma", style: TextStyle(color: Colors.white)),
-                        Text("Sanatları", style: TextStyle(color: Colors.white))
+                        Text("Kendini ", style: TextStyle(color: Colors.white)),
+                        Text("Koru !", style: TextStyle(color: Colors.white)),
                       ],
                     ),
                   ],
                 ),
                 onPressed: () {
-
+                  return Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => VideoScreen()));
                 },
               ),
             ),
