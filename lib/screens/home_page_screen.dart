@@ -195,7 +195,6 @@ class HomePageScreenState extends State {
       ],
     );
   }
-
   void selectProcess(Options options) {
     switch (options) {
       case Options.Hesabim:
