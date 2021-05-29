@@ -30,9 +30,14 @@ dependencies:
   cupertino_icons: ^1.0.2
   chewie: ^0.12.2
   video_player: ^1.0.1
+  audioplayers: ^0.19.0
+  geolocator: ^7.0.3
+  get: ^3.26.0
   cloud_firestore: ^1.0.6
   firebase_auth: ^1.0.2
   firebase_core: ^1.0.3
+
+
 
 
 dev_dependencies:

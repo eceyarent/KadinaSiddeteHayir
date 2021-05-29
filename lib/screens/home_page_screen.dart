@@ -1,8 +1,16 @@
+
+import 'dart:io';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:kadina_siddete_hayir/screens/account_screen.dart';
 import 'package:kadina_siddete_hayir/screens/information_screen.dart';
 import 'package:kadina_siddete_hayir/screens/relatives_list_screen.dart';
 import 'package:kadina_siddete_hayir/screens/video_screen.dart';
+import 'package:kadina_siddete_hayir/service/geolocatorService.dart';
+
 
 class HomePageScreen extends StatefulWidget{
   @override
@@ -14,6 +22,8 @@ class HomePageScreen extends StatefulWidget{
 }
 enum Options { Hesabim }
 class HomePageScreenState extends State {
+  final geolocatorService = Get.put(GeolocatorService());
+  final player = AudioCache();
   String mesaj = "Kadına Şiddete Hayır";
 
   @override
@@ -59,7 +69,7 @@ class HomePageScreenState extends State {
                 child: IconButton(
                   icon: Icon(Icons.location_on, color: Colors.black,size: 100.0,),
                   highlightColor: Colors.deepPurple,
-                  onPressed: () {},
+                  onPressed: () { getLocation();},
               ),
             )
           ],
@@ -73,7 +83,10 @@ class HomePageScreenState extends State {
                 padding: EdgeInsets.all(0.0),
                 icon: Icon(Icons.volume_up, color: Colors.black, size: 100.0,),
                 highlightColor: Colors.deepPurple,
-                onPressed: () {},
+                onPressed: () {
+                  player.play('Polis Siren Sesi (Uzun 10 dk.) (mp3cut.net) (1).wav');
+
+                },
               ),
             ),
           ),
@@ -191,6 +204,33 @@ class HomePageScreenState extends State {
         break;
       default:
     }
+  }
+
+  void getLocation() {
+    Geolocator.requestPermission().then((request) {
+      print("REQUEST : $request");
+      if (Platform.isAndroid) {
+        if (request != LocationPermission.always) {
+          print("NOT LOCATION PERMISSION");
+          return;
+        } else {
+          print("PERMISSION OK");
+          geolocatorService.permissionOK();
+        }
+      } else {
+        if (Platform.isIOS) {
+          if (request != LocationPermission.always) {
+            print("NOT LOCATION PERMISSION");
+            return;
+          } else {
+            print("PERMISSION OK");
+            geolocatorService.permissionOK();
+            print('x: ${geolocatorService.currentLocation
+                .latitude}, y: ${geolocatorService.currentLocation.longitude}');
+          }
+        }
+      }
+    });
   }
 }
 
