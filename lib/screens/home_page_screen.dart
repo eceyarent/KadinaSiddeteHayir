@@ -205,6 +205,7 @@ class HomePageScreenState extends State {
     }
   }
 
+
   void getLocation() {
     Geolocator.requestPermission().then((request) {
       print("REQUEST : $request");
