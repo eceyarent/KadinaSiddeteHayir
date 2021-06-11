@@ -32,6 +32,9 @@ dependencies:
   video_player: ^1.0.1
   audioplayers: ^0.19.0
   geolocator: ^7.0.3
+  url_launcher: ^6.0.6
+  flutter_flashlight: ^1.0.0
+  flutter_phone_direct_caller: ^2.0.0
   get: ^3.26.0
   cloud_firestore: ^1.0.6
   firebase_auth: ^1.0.2

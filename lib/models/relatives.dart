@@ -5,16 +5,24 @@ class Relatives{
   String name;
   String surName;
   String phoneNumber;
-  String image;
 
-  Relatives({this.id,this.name,this.surName,this.phoneNumber,this.image});
+  Relatives({this.id,this.name,this.surName,this.phoneNumber});
   factory Relatives.fromSnapshot(DocumentSnapshot snapshot){
     return Relatives(
       id:snapshot.id,
       name: snapshot["name"],
       surName: snapshot["surName"],
       phoneNumber: snapshot["phoneNumber"],
-      image: snapshot["image"]
+
     );
   }
+
+  Relatives.fromMap(Map<String,dynamic>map)
+      : assert(map["name"] != null),
+        assert(map["surName"] != null),
+        assert(map["phoneNumber"] != null),
+        name= map["name"],
+        surName=map["surName"],
+        phoneNumber=map["phoneNumber"];
+
 }

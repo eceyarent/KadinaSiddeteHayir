@@ -2,6 +2,8 @@
     package="com.example.kadina_siddete_hayir">
     <uses-permission android:name="android.permission.INTERNET"/>
     <uses-permission android:name="android.permission.ACCESS_BACKGROUND_LOCATION"/>
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.CALL_PRIVILEGED"/>
    <application
         android:label="kadina_siddete_hayir"
         android:icon="@mipmap/ic_launcher">
