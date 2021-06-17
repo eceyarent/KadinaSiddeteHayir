@@ -12,8 +12,8 @@ class VideoService extends StatefulWidget{
     @required this.videoPlayerController,
     this.looping,
     this.autoplay,
-    Key key})
-  : super(key: key);
+    Key key,
+  }) : super(key: key);
   @override
   _VideoServiceState  createState() => _VideoServiceState();
 
@@ -27,7 +27,7 @@ class _VideoServiceState extends State<VideoService>{
     super.initState();
     _chewieController = ChewieController(
       videoPlayerController: widget.videoPlayerController,
-      aspectRatio: 16 / 9,
+      aspectRatio: 16/9,
       autoInitialize: true,
       autoPlay: widget.autoplay,
       looping: widget.looping,
@@ -40,12 +40,7 @@ class _VideoServiceState extends State<VideoService>{
 
   }
 
-  @override
-  void dispose() {
-    // TODO: implement dispose
-    super.dispose();
-    _chewieController.dispose();
-  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -54,6 +49,14 @@ class _VideoServiceState extends State<VideoService>{
     child: Chewie(
       controller: _chewieController,),
   );
+  }
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    widget.videoPlayerController.dispose();
+    _chewieController.dispose();
   }
 
 }

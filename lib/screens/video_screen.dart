@@ -8,35 +8,47 @@ class VideoScreen extends StatelessWidget{
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.deepPurple,
-        automaticallyImplyLeading: false,
         title: Text("Kadına Şiddete Hayır"),
-
-
         centerTitle: true,
       ),
-      body:SingleChildScrollView(
-        child: Column(
-          children:<Widget> [
-            Container(
-              height: 250.0,
-              width: 200.0,
-              child: VideoService(
-                  videoPlayerController: VideoPlayerController.asset('assets/video1.mp4'),
+      body:ListView(
+            children:<Widget> [
+              Container(
+                height: 300,
+                child: VideoService(
+                  videoPlayerController: VideoPlayerController.asset('assets/kadina-siddete-hayir-diyelim.mp4'),
                   looping: true,
-                  autoplay: true,
+                  autoplay: false,
                 ),
-            ),
-            VideoService(
-              videoPlayerController: VideoPlayerController.asset('assets/video_2.mp4'),
-              looping: false,
-              autoplay: false,
-            ),
+              ),
+              Container(
+                height: 300,
+                child: VideoService(
+                  videoPlayerController: VideoPlayerController.asset('assets/video3.mp4'),
+                  looping: false,
+                  autoplay: false,
+                ),
+              ),
+              Container(
+                height: 300,
+                child: VideoService(
+                    videoPlayerController: VideoPlayerController.asset('assets/video1.mp4'),
+                    looping: false,
+                    autoplay: false,
+                  ),
+              ),
+              Container(
+                height: 300,
+                child: VideoService(
+                  videoPlayerController: VideoPlayerController.asset('assets/video_2.mp4'),
+                  looping: false,
+                  autoplay: false,
 
-          ],
-        ),
-      ),
-
-    );
+                ),
+              ),
+            ],
+          ),
+        );
 
   }
 

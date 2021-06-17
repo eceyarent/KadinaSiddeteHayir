@@ -2,6 +2,7 @@ import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_flashlight/flutter_flashlight.dart';
 import 'package:kadina_siddete_hayir/models/relatives.dart';
+import 'package:kadina_siddete_hayir/screens/light_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
@@ -32,21 +33,13 @@ class HomePageScreenState extends State {
       print("$command bulunamadı");
     }
   }
-  var _hasFlashlight = false;
-  var isON = false;
 
-  checkLight() async {
-    bool hasFlash = await Flashlight.hasFlashlight;
-    setState(() {
-      _hasFlashlight = hasFlash;
-    });
-  }
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    checkLight();
+
 
 
 
@@ -70,6 +63,7 @@ class HomePageScreenState extends State {
           )
         ],
         centerTitle: true,
+        automaticallyImplyLeading: false,
         backgroundColor: Colors.deepPurple,
         title: Text(mesaj, style: TextStyle(color: Colors.white)),
       ),
@@ -120,7 +114,7 @@ class HomePageScreenState extends State {
                     ],
                   ),
                   SizedBox(
-                    height: 100,
+                    height: 150,
                   ),
                   Row(
                     children: [
@@ -143,37 +137,28 @@ class HomePageScreenState extends State {
                       SizedBox(
                         width: 150,
                       ),
-                    Container(
-
-                      child: Center(
-                        child: Transform.rotate(
-                            angle: -3.14/ 2,
-                          child: Transform.scale(
-                              scale: 2.5,
-                            child: Switch(
-                              inactiveThumbColor: Colors.black,
-                              activeColor: Colors.deepPurple,
-                              value: isON ,
-                              onChanged: (value){
-                                setState(() {
-                                  isON=!isON;
-                                  isON? Flashlight.lightOn() : Flashlight.lightOff();
-                                });
-
-                            }
+                      Row(
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.highlight,
+                              size: 100.0,
+                              color: Colors.black,
                             ),
-
-
-
+                            highlightColor: Colors.deepPurple,
+                            onPressed: () {
+                              return Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => LightScreenScreen()));
+                            },
                           ),
-
-                        ),
+                        ],
                       ),
-                    )
                     ],
                   ),
                   SizedBox(
-                    height: 100,
+                    height: 150,
                   ),
                   Row(
                     children: [
@@ -222,92 +207,105 @@ class HomePageScreenState extends State {
               Flexible(
                 fit: FlexFit.tight,
                 flex: 1,
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.account_circle_outlined,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Column(
-                        children: [
-                          Text("Yakınlarım",
+                child: SizedBox(
+                  height: 80,
+                  child: RaisedButton(
+                    color: Colors.deepPurple,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.account_circle_outlined,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Center(
+                          child: Text("Yakınlar",
                               style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
-                    ],
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RelativesListScreen()));
+                    },
                   ),
-                  onPressed: () {
-                    return Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => RelativesListScreen()));
-                  },
                 ),
               ),
               Flexible(
                 fit: FlexFit.tight,
                 flex: 1,
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.article_outlined,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Column(
-                        children: [
-                          Text("Önemli ",
-                              style: TextStyle(color: Colors.white)),
-                          Text("Bilgiler",
-                              style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
-                    ],
+                child: SizedBox(
+                  height: 80,
+                  child: RaisedButton(
+                    color: Colors.deepPurple,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.article_outlined,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: Column(
+                            children: [
+                              Text("Önemli ",
+                                  style: TextStyle(color: Colors.white)),
+                              Text("Bilgiler",
+                                  style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => InformationScreen()));
+                    },
                   ),
-                  onPressed: () {
-                    return Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => InformationScreen()));
-                  },
                 ),
               ),
               Flexible(
                 fit: FlexFit.tight,
                 flex: 1,
-                child: RaisedButton(
-                  color: Colors.deepPurple,
-                  child: Row(
-                    children: [
-                      Icon(
-                        Icons.accessibility_new,
-                        color: Colors.white,
-                      ),
-                      SizedBox(
-                        width: 10.0,
-                      ),
-                      Column(
-                        children: [
-                          Text("Kendini ",
-                              style: TextStyle(color: Colors.white)),
-                          Text("Koru !", style: TextStyle(color: Colors.white)),
-                        ],
-                      ),
-                    ],
+                child: SizedBox(
+                  height: 80,
+                  child: RaisedButton(
+                    color: Colors.deepPurple,
+                    child: Row(
+                      children: [
+                        Icon(
+                          Icons.accessibility_new,
+                          color: Colors.white,
+                        ),
+                        SizedBox(
+                          width: 10.0,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(top: 25),
+                          child: Column(
+                            children: [
+                              Text("Kendini ",
+                                  style: TextStyle(color: Colors.white)),
+                              Text("Koru !", style: TextStyle(color: Colors.white)),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                    onPressed: () {
+                      return Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => VideoScreen()));
+                    },
                   ),
-                  onPressed: () {
-                    return Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => VideoScreen()));
-                  },
                 ),
               ),
             ],
@@ -370,7 +368,7 @@ void sendsms1() async{
       } else {
         print("PERMISSION OK");
         geolocatorService.permissionOK();
-        String sms1="sms:"+number+"?body=x: ${geolocatorService.currentLocation.latitude}, y: ${geolocatorService.currentLocation.longitude}";
+        String sms1="sms:"+number+"?body=https://www.google.com/maps/place/${geolocatorService.currentLocation.latitude},${geolocatorService.currentLocation.longitude}";
         launch(sms1);
       }
     }

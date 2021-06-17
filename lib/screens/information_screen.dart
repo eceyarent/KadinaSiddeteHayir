@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:kadina_siddete_hayir/screens/information_detail_screen.dart';
 import 'package:kadina_siddete_hayir/service/informationsService.dart';
@@ -51,11 +53,14 @@ class InformationScreenState extends State {
                       borderRadius: BorderRadius.all(Radius.circular(5))
                   ),
                   child: Padding(
-                    padding: const EdgeInsets.all(15.0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Row(
                       children: [
                         SizedBox(width: 10,),
-                        Text("${mypost['Text']}"),
+                        Expanded(
+                          child: Text("${mypost['Text']}"),
+                          flex: 2,
+                        ),
 
                       ],
                     ),

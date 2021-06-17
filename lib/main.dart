@@ -21,6 +21,7 @@ class MyApp extends StatefulWidget {
     Widget build(BuildContext context) {
       return Scaffold(
         appBar: AppBar(
+          centerTitle: true,
           backgroundColor: Colors.deepPurple,
           title: Text(mesaj),
         ),
