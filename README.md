@@ -2,5 +2,5 @@
 
 1.Projenin Tasarımı
 
-<[giriskayit]"https://user-images.githubusercontent.com/74072821/123163965-08490080-d47b-11eb-8b9b-d29a2f5bdf39.jpg"width="500" height="600">
+<img src="https://user-images.githubusercontent.com/74072821/123165366-d042bd00-d47c-11eb-9889-2bd703d8bfc6.jpg" width="500" height="600">
 
