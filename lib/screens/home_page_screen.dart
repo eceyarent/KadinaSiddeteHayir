@@ -3,7 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_flashlight/flutter_flashlight.dart';
 import 'package:kadina_siddete_hayir/models/relatives.dart';
-import 'package:kadina_siddete_hayir/screens/deneme.dart';
+import 'package:kadina_siddete_hayir/screens/arduino.dart';
 import 'package:kadina_siddete_hayir/screens/light_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:audioplayers/audioplayers.dart';
