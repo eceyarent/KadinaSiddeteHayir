@@ -25,4 +25,12 @@ class Relatives{
         surName=map["surName"],
         phoneNumber=map["phoneNumber"];
 
+         Map<String, dynamic> toJson() {
+    return {
+      'name': this.name,
+      'surName': this.surName,
+      'phoneNumber': this.phoneNumber,
+    };
+  }
+
 }

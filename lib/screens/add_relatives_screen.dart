@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kadina_siddete_hayir/models/relatives.dart';
 import 'package:kadina_siddete_hayir/screens/relatives_list_screen.dart';
 import 'package:kadina_siddete_hayir/service/RelativesService.dart';
+import 'package:kadina_siddete_hayir/service/database.dart';
 
 class AddRelativesScreen extends StatefulWidget{
   @override
@@ -73,12 +75,27 @@ class _AddRelativesScreenState extends State<AddRelativesScreen> {
   }
 
   void goToRelativesListScreen() {
-    _relativesService.addRelatives(_nameController.text, _surNameController.text, _phoneNumberController.text);
-    Navigator.push(context, MaterialPageRoute(builder: (context) => RelativesListScreen()));
+    var relatives = new Relatives(
+        name: _nameController.text,
+        surName: _surNameController.text,
+        phoneNumber: _phoneNumberController.text);
+
+    saveRelatives(relatives);
+
+    _relativesService.addRelatives(_nameController.text,
+        _surNameController.text, _phoneNumberController.text);
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) => RelativesListScreen()));
+  }
   }
 
 
 
-}
+
+  
+
+
+
+
 
 

@@ -1,7 +1,9 @@
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter_flashlight/flutter_flashlight.dart';
 import 'package:kadina_siddete_hayir/models/relatives.dart';
+import 'package:kadina_siddete_hayir/screens/deneme.dart';
 import 'package:kadina_siddete_hayir/screens/light_screen.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:audioplayers/audioplayers.dart';
@@ -14,6 +16,7 @@ import 'package:kadina_siddete_hayir/screens/relatives_list_screen.dart';
 import 'package:kadina_siddete_hayir/screens/video_screen.dart';
 import 'package:kadina_siddete_hayir/service/geolocatorService.dart';
 import 'package:flutter_phone_direct_caller/flutter_phone_direct_caller.dart';
+
 class HomePageScreen extends StatefulWidget {
   @override
   State<StatefulWidget> createState() {
@@ -22,6 +25,7 @@ class HomePageScreen extends StatefulWidget {
 }
 
 enum Options { Hesabim }
+FirebaseDatabase db;
 
 class HomePageScreenState extends State {
   final geolocatorService = Get.put(GeolocatorService());
@@ -34,40 +38,48 @@ class HomePageScreenState extends State {
     }
   }
 
-
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
 
+    // final dref = FirebaseDatabase.instance.reference();
+    // DatabaseReference databaseReference;
 
-
-
+    // dref.once().then((snapshot) {
+    //   print(snapshot.snapshot.value);
+    //   String buttonState = snapshot.snapshot.value.toString();
+    //   if (buttonState == '{buttonState: 1}') {
+    //     sendsms();
+    //   }
+    // });
   }
 
   String mesaj = "Kadına Şiddete Hayır";
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        actions: [
-          PopupMenuButton<Options>(
-            onSelected: selectProcess,
-            itemBuilder: (BuildContext context) => <PopupMenuEntry<Options>>[
-              PopupMenuItem(
-                value: Options.Hesabim,
-                child: Text("Hesabım"),
-              ),
-            ],
-          )
-        ],
-        centerTitle: true,
-        automaticallyImplyLeading: false,
-        backgroundColor: Colors.deepPurple,
-        title: Text(mesaj, style: TextStyle(color: Colors.white)),
+    return name(
+      scaffold: Scaffold(
+        appBar: AppBar(
+          actions: [
+            PopupMenuButton<Options>(
+              onSelected: selectProcess,
+              itemBuilder: (BuildContext context) => <PopupMenuEntry<Options>>[
+                PopupMenuItem(
+                  value: Options.Hesabim,
+                  child: Text("Hesabım"),
+                ),
+              ],
+            )
+          ],
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+          backgroundColor: Colors.deepPurple,
+          title: Text(mesaj, style: TextStyle(color: Colors.white)),
+        ),
+        body: buildBody(context),
       ),
-      body: buildBody(context),
     );
   }
 
@@ -89,7 +101,6 @@ class HomePageScreenState extends State {
                                 size: 100.0, color: Colors.black),
                             highlightColor: Colors.deepPurple,
                             onPressed: _callNumber,
-
                           ),
                         ],
                       ),
@@ -129,7 +140,7 @@ class HomePageScreenState extends State {
                             highlightColor: Colors.deepPurple,
                             onPressed: () {
                               player.play(
-                                  'Polis Siren Sesi (Uzun 10 dk.) (mp3cut.net) (1).wav');
+                                  'Polis Siren Sesi (Uzun 10 dk (mp3cut.net).wav');
                             },
                           ),
                         ],
@@ -150,7 +161,8 @@ class HomePageScreenState extends State {
                               return Navigator.push(
                                   context,
                                   MaterialPageRoute(
-                                      builder: (context) => LightScreenScreen()));
+                                      builder: (context) =>
+                                          LightScreenScreen()));
                             },
                           ),
                         ],
@@ -295,15 +307,18 @@ class HomePageScreenState extends State {
                             children: [
                               Text("Kendini ",
                                   style: TextStyle(color: Colors.white)),
-                              Text("Koru !", style: TextStyle(color: Colors.white)),
+                              Text("Koru !",
+                                  style: TextStyle(color: Colors.white)),
                             ],
                           ),
                         ),
                       ],
                     ),
                     onPressed: () {
-                      return Navigator.push(context,
-                          MaterialPageRoute(builder: (context) => VideoScreen()));
+                      return Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => VideoScreen()));
                     },
                   ),
                 ),
@@ -325,55 +340,56 @@ class HomePageScreenState extends State {
     }
   }
 
-
-  void _callNumber() async{
+  void _callNumber() async {
     const number = '+90-112'; //set the number here
     bool res = await FlutterPhoneDirectCaller.callNumber(number);
-
   }
 
-  void _callNumbers() async{
-      List<Relatives> query = [];
-      QuerySnapshot result = await FirebaseFirestore.instance.collection("relatives").get();
-      query = result.docs.map((e) => Relatives.fromMap(e.data())).toList();
+  void _callNumbers() async {
+    List<Relatives> query = [];
+    QuerySnapshot result =
+        await FirebaseFirestore.instance.collection("relatives").get();
+    query = result.docs.map((e) => Relatives.fromMap(e.data())).toList();
 
-      var number = query[0].phoneNumber;
-      bool res = await FlutterPhoneDirectCaller.callNumber(number);
+    var number = query[0].phoneNumber;
+    bool res = await FlutterPhoneDirectCaller.callNumber(number);
   }
 }
 
-void sendsms() async{
+void sendsms() async {
   List<Relatives> query = [];
-  QuerySnapshot result = await FirebaseFirestore.instance.collection("relatives").get();
+  QuerySnapshot result =
+      await FirebaseFirestore.instance.collection("relatives").get();
   query = result.docs.map((e) => Relatives.fromMap(e.data())).toList();
   var number = query[0].phoneNumber;
 
-  String sms1 = "sms:"+number+"?body=Deneme%20mesajı";
+  String sms1 = "sms:" +
+      number +
+      "?body=GÜVENDE%20DEĞİLİM%20ACİL%20YARDIMA%20İHTİYACIM%20VAR.";
   launch(sms1);
-
 }
 
-void sendsms1() async{
+void sendsms1() async {
   final geolocatorService = Get.put(GeolocatorService());
   List<Relatives> query = [];
-  QuerySnapshot result = await FirebaseFirestore.instance.collection("relatives").get();
+  QuerySnapshot result =
+      await FirebaseFirestore.instance.collection("relatives").get();
   query = result.docs.map((e) => Relatives.fromMap(e.data())).toList();
   var number = query[0].phoneNumber;
-  Geolocator.requestPermission().then((request) {
+  Geolocator.requestPermission().then((request) async {
     print("REQUEST : $request");
     if (Platform.isAndroid) {
-      if (request != LocationPermission.always) {
+      if (request != LocationPermission.whileInUse) {
         print("NOT LOCATION PERMISSION");
         return;
       } else {
         print("PERMISSION OK");
-        geolocatorService.permissionOK();
-        String sms1="sms:"+number+"?body=https://www.google.com/maps/place/${geolocatorService.currentLocation.latitude},${geolocatorService.currentLocation.longitude}";
+        await geolocatorService.permissionOK();
+        String sms1 = "sms:" +
+            number +
+            "?body=https://www.google.com/maps/place/${geolocatorService.currentLocation.latitude},${geolocatorService.currentLocation.longitude}";
         launch(sms1);
       }
     }
   });
-
 }
-
-
